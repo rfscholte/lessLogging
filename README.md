@@ -38,6 +38,14 @@ If you still want or need to use the `@SpringBootTest`, but want to get rid of t
 You might expect that is using the default or your specified logging framework, but it not. This banner is printed before the logging framework is initialized.
 However, the Spring properties are already loaded, and there's one property to control this: `spring.main.banner-mode`.
 
-Issue: https://github.com/rfscholte/lessLogging/tree/issues/spring-boot_banner
-Solution : https://github.com/rfscholte/lessLogging/tree/solutions/spring-boot_banner
-PR: https://github.com/rfscholte/lessLogging/pull/1
+A small note: in this case adding `application.properties` to `src/test/resources` works, because there's no such file under `src/main/resources`, so it will be the first and only `application.properties` on the classpath. Other spring-boot examples will show you how to solve it if `src/main/resources/application.properties` does exist.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/spring-boot_banner
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/spring-boot_banner
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/1
+
