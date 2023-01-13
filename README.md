@@ -1,6 +1,6 @@
 # lessLogging
 
-![crowded beach and empty beach](assets/images/beaches.jpg)
+![crowded beach and empty beach](assets/images/beaches.png)
 
 Compare these two pictures with the output of your build. Most builds I've seen look more like the crowded beach, but wouldn't it be nicer (and boring, I know) to have an empty beach where Waldo is in clear sight?
 
