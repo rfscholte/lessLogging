@@ -28,6 +28,12 @@ To run an example, go to its directory and run `mvn test`
 
 At the moment Spring boot is one of the most popular frameworks. There are some cases where it logs too much by default, but here are some ways to reduce that.
 
+In the first paragraph (Banner) I'll show you how to control the startup banner during test. 
+For all other paragraphs I'll add an `application.properties` to `src/main/java` to represent a more realistic Spring boot application.
+In this file I'll turn off the banner.
+I wouldn't do this normally, but it is just an easy way to verify the setup.
+This means that IF you do see the banner during tests, then there's a classloading issue.
+
 ### Banner
 
 This is about the `@SpringBootTest`. Let's start by saying that this annotation is not meant for unittests, but for integration tests.
@@ -49,3 +55,28 @@ Solution
 Pull Request
 : https://github.com/rfscholte/lessLogging/pull/1
 
+### JPA
+
+If you're using the @DataJpaTest it is likely you'll see output similar to this:
+
+    Hibernate: drop table if exists lorem cascade
+    Hibernate: drop sequence if exists lorem_seq
+    Hibernate: create sequence lorem_seq start with 1 increment by 50
+    Hibernate: create table lorem (id bigint not null, primary key (id))    
+
+There might be a reason to log this in production, but for me there's no reason to do that during tests.
+This output looks much different compared to your standard output of your logging framework. 
+Trying to suppress it with your logging framework has no effect (check the `logback-test.xml` in the example).
+Instead you need to inform your persistence framework to suppress these SQL statements.
+
+The DataJpaTest has a attribute for it called `showSql`, which is set to `true` by default.
+Changing its value to `false` will suppress the JPA logging.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/spring-boot_jpa
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/spring-boot_jpa
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/2
