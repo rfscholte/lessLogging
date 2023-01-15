@@ -18,11 +18,19 @@ package com.sourcegrounds.lesslogging;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Application
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger( Application.class );
+    
     public static void main( String[] args )
     {
-        System.out.println( getMessage( args ) );
+        if( LOGGER.isInfoEnabled() )
+        {
+            LOGGER.info( getMessage( args ) );
+        }
     }
     
     static String getMessage( String... args )
