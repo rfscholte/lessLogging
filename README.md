@@ -24,6 +24,28 @@ To run an example, go to its directory and run `mvn test`
 [3]: https://github.com/rfscholte/lessLogging/tree/solutions
 [4]: https://github.com/rfscholte/lessLogging/pulls?q=is%3Apr+is%3Asolution
 
+## Loggers
+
+### System.out
+
+This is one of the most used ways to quickly write something to the console. But by doing this, it can never be suppressed.
+For that reason the basic rule here is: never commit/push code using System.out/System.err!
+It is okay to do it during experimenting on your own machine, as long as it doesn't end up in the source repository.
+
+For the main code it should be replaced with a logging framework, so we can control when to print these messages.
+But for the main code it should be replaced with asserts for the following reason:
+- consistency: the output should be handled the same by every developer. It is hard to know why a line was printed to the output: formatting? casing? proper language?
+- continuity: the output should be tested every time, not only when the developer feels like it.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/logging_system-out
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/logging_system-out
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/3
+
 ## Spring-boot
 
 At the moment Spring boot is one of the most popular frameworks. There are some cases where it logs too much by default, but here are some ways to reduce that.
