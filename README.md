@@ -51,6 +51,11 @@ Pull Request
 In case Logback is on the classpath, either as direct dependency or pulled in via a transitive dependency, it will log to the console.
 Logback has a [strategy][5] how to configure it. It there's a `logback-test.xml`, it will used instead of the `logback.xml`, which is very useful in our case.
 
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+    	<root level="OFF"/>
+    </configuration>
+
 Issue
 : https://github.com/rfscholte/lessLogging/tree/issues/logging_logback
 
