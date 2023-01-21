@@ -46,6 +46,22 @@ Solution
 Pull Request
 : https://github.com/rfscholte/lessLogging/pull/3
 
+### Logback
+
+In case Logback is on the classpath, either as direct dependency or pulled in via a transitive dependency, it will log to the console.
+Logback has a [strategy][5] how to configure it. It there's a `logback-test.xml`, it will used instead of the `logback.xml`, which is very useful in our case.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/logging_logback
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/logging_logback
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/4
+
+[5]: https://logback.qos.ch/manual/configuration.html
+
 ## Spring-boot
 
 At the moment Spring boot is one of the most popular frameworks. There are some cases where it logs too much by default, but here are some ways to reduce that.
