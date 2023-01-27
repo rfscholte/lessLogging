@@ -56,6 +56,35 @@ Solution
 Pull Request
 : https://github.com/rfscholte/lessLogging/pull/3
 
+### Log4J
+
+Website
+: https://logging.apache.org/log4j/2.x
+
+Default root logger level
+: ERROR
+
+Unlike logback, the Log4J team maintains their own SLF4J adapter, keep that in mind when adding the dependencies.
+Also, the default logging level for the rootLogger is error, so the chance that you see any logging during is hopefully little.
+Depending on your delivery strategy, you either provide the production logging configuration as part of your maincode (as done in the example), or you add/refer to it afterwards.
+This logging can also be suppressed during the test phase of the build by adding `log4j2-test.xml` to `src/test/resources`.
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration strict="true">
+      <Loggers>
+        <Root level="OFF"/>
+      </Loggers>
+    </Configuration>
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/logging_log4j
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/logging_log4j
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/5
+
 ### Logback
 
 Website
