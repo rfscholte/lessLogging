@@ -26,6 +26,16 @@ To run an example, go to its directory and run `mvn test`
 
 ## Loggers
 
+Logging is considered to be an important aspect of software development, as it allows developers and administrators to understand how the system is being used and identify any issues that may arise. 
+It provides valuable information for debugging and troubleshooting, as well as for monitoring the system's performance and security. 
+Logging can also be used to comply with regulatory requirements, such as those related to data privacy and security. 
+Overall, logging plays a crucial role in maintaining the reliability, stability, and security of a system, and it is important to design and implement a robust logging strategy to meet the needs of the system and its users.
+
+Your application logging is useful at runtime, most likely not during buildtime. While testing your code as part of the build, the code is in a runtime-state, however you shouldn't care about the logging at that time, as you're not testing the logging-framework, right?
+
+In this paragraph I use SLF4J as the API to the actual logging framework, unless I'm using JDK specific output features. 
+SLJF4J is currently one of the most used logging APIs and it will make the examples look similar, making it easier to understand the solution.
+
 ### System.out
 
 This is one of the most used ways to quickly write something to the console. But by doing this, it can never be suppressed.
@@ -48,7 +58,14 @@ Pull Request
 
 ### Logback
 
+Website
+: https://logback.qos.ch/
+
+Default root logger level
+: DEBUG
+
 In case Logback is on the classpath, either as direct dependency or pulled in via a transitive dependency, it will log to the console.
+By default the loglevel for the root logger is `debug`, so if there's no configuration, logback will log anyway.
 Logback has a [strategy][5] how to configure it. It there's a `logback-test.xml`, it will used instead of the `logback.xml`, which is very useful in our case.
 
     <?xml version="1.0" encoding="UTF-8"?>
