@@ -56,6 +56,37 @@ Solution
 Pull Request
 : https://github.com/rfscholte/lessLogging/pull/3
 
+### Java Logging (JUL)
+
+Website
+: https://docs.oracle.com/en/java/javase/11/core/java-logging-overview.html
+
+Default root logger level
+: INFO
+
+Since Java 1.4 the JDK has been enriched with platform's core logging facilities, located in the `java.util.logging` package.
+There's is a [JUL to SLF4J bridge][6], but you shouldn't use is. Most likely you will loose the performance boost from suppressing logging by this single library. Hence the following statement on the SLF4j webpage: **j.u.l. to SLF4J translation can seriously increase the cost of disabled logging statements (60-fold or 6000%) and measurably impact the performance of enabled log statements (20% overall increase).** 
+
+To configure JUL, you need provide one or more system properties, as described on the [LogManager JavaDoc][7]. 
+In case of Maven, if you want to suppress logging during test you need to configure the maven-surefire-plugin by adding the [system properties][8].
+
+Most likely the simplest option is to add `logging-test.properties` to `src/test/resources`
+
+    .level=OFF
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/logging_jul
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/logging_jul
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/6
+
+[6]: https://www.slf4j.org/legacy.html#jul-to-slf4j
+[7]: https://docs.oracle.com/en/java/javase/17/docs/api/java.logging/java/util/logging/LogManager.html
+[8]: https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#systemPropertyVariables
+
 ### Log4J
 
 Website
