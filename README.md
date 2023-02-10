@@ -33,7 +33,7 @@ Overall, logging plays a crucial role in maintaining the reliability, stability,
 
 Your application logging is useful at runtime, most likely not during buildtime. While testing your code as part of the build, the code is in a runtime-state, however you shouldn't care about the logging at that time, as you're not testing the logging-framework, right?
 
-In this paragraph I use SLF4J as the API to the actual logging framework, unless I'm using JDK specific output features. 
+In this paragraph I use SLF4J as the API to the actual logging framework where possible. 
 SLJF4J is currently one of the most used logging APIs and it will make the examples look similar, making it easier to understand the solution.
 
 ### System.out
@@ -86,6 +86,40 @@ Pull Request
 [6]: https://www.slf4j.org/legacy.html#jul-to-slf4j
 [7]: https://docs.oracle.com/en/java/javase/17/docs/api/java.logging/java/util/logging/LogManager.html
 [8]: https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#systemPropertyVariables
+
+### JBoss Logging
+
+Website
+: https://github.com/jboss-logging/jboss-logging
+
+JBoss Logging is an abstraction layer which provides support for the internationalization and localization of log messages and exception messages. 
+However, JBoss Logging itself does not write any log messages. 
+Instead, it only constructs a log message and delegates to one of the supported logging frameworks.
+
+The following table shows the available Service Providers for JBoss Logger Provider. 
+You define this by creating the text-file `/META-INF/services/org.jboss.logging.LoggerProvider` and include the classname of the preferred provider.
+Assuming you want to use this setting for testing and application runtime, it makes sense to add this to `src/main/resources`.
+
+| index | name             | service provider
+| ----- |------------------|------------------------------------------
+| 1     | JBoss Logmanager | `org.jboss.logging.JBossLogManagerProvider`
+| 2     | Log4J 2          | `org.jboss.logging.Log4j2LoggerProvider`
+| 3     | Slf4J            | `org.jboss.logging.Slf4jLoggerProvider`
+| 4     | Log4j (eol)      | `org.jboss.logging.Log4jLoggerProvider`
+| 5     | JUL              | `org.jboss.logging.JDKLoggerProvider`
+
+If there's no service provider set, JBoss Logging will attempt to find the logging frameworks from the above-mentioned list on the classpath - the first one found is taken.
+
+Next you need to select the matching strategy to suppress the logging during test.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/logging_jboss-logging
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/logging_jboss-logging
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/7
 
 ### Log4J
 
