@@ -234,3 +234,27 @@ Solution
 
 Pull Request
 : https://github.com/rfscholte/lessLogging/pull/2
+
+## Liquibase
+
+When using Liquibase you'll probably will see something like this:
+
+    Running Changeset: classpath:/db/changelog/db.changelog-master.yaml::1::rfscholte
+    
+Liquibase uses an object called [Scope](6), which is a context aware instance. The idea is that a scope is immutable, but
+by entering or exiting the scope you can change the context. The root-scope has by default a ConsoleUIService, which writes directly to the `System.out`. So to suppress the logging you need to switch to the LoggerUIService, which can only be done
+by entering a new scope with adjusted context.
+
+In case of Spring boot you need to do this before the liquibase bean is initiated, which is very early during startup.
+One of the solutions is to make use of BeanPostProcessor, a hook that is called for every bean before initialization.
+
+Issue
+: https://github.com/rfscholte/lessLogging/tree/issues/liquibase_scope
+
+Solution 
+: https://github.com/rfscholte/lessLogging/tree/solutions/liquibase_scope
+
+Pull Request
+: https://github.com/rfscholte/lessLogging/pull/8
+
+[6] https://github.com/liquibase/liquibase/blob/master/liquibase-standard/src/main/java/liquibase/Scope.java
