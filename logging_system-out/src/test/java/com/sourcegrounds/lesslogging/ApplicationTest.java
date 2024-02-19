@@ -17,17 +17,20 @@ package com.sourcegrounds.lesslogging;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ApplicationTest
 {
     @Test
     void main()
     {
-        Application.main( new String[0] );
+        assertDoesNotThrow( () -> Application.main( new String[0] ) );
     }
-    
+
     @Test
     void getMessage()
     {
-        System.out.println( Application.getMessage( "--version" ) );
+        assertEquals( Application.getMessage( "--version" ), "Received the following arguments: --version" );
     }
 }
